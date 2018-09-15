@@ -9,7 +9,9 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
     //joystick will refer to the combination of light blue bg halo and options text
     //button will refer to the white button with shadow that is always visible
     //joystick nub will refer to that button when it can be moved around
-    bool highlighting;
+
+       
+
     string OptionChosen;
 
     bool B_Joystick_Visible = false;
@@ -37,13 +39,13 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
         {
             touch = Input.GetTouch(0);
             Nub.transform.position = touch.position;
-            ButtonSelected(30, "Highlight"); //this will tell what to highlight
-            ButtonSelected(60,"Press"); //this will just choose it
+            //ButtonSelected(30, false); //this will tell what to highlight
+            ButtonSelected(60,true); //this will just chose it
 
             if (touch.phase == TouchPhase.Ended)
             {
-                ButtonSelected(45,"Press");
-                CloseJS();
+                ButtonSelected(45,true);
+              
             }
         }
     }
@@ -84,7 +86,7 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
         }
     }
 
-    void ButtonSelected(int NubDisplacement, string ActionTakenIfGreater)
+    void ButtonSelected(int NubDisplacement, bool wantToPressIfGreater)
     {
         if (Nub.transform.localPosition.magnitude > NubDisplacement)
         {
@@ -101,26 +103,11 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
                 else { OptionChosen = "bottomLeft"; }
             }
 
+            RegionActionHandler();
+            if (wantToPressIfGreater) { CloseJS(); return; }
             
-            
-            switch (ActionTakenIfGreater)
-            {
-                case "Press":
-                    RegionActionHandler();
-                    CloseJS();
-                    break;
-                case "Highlight":GameObject go = GameObject.Find(OptionChosen);
-                    go.GetComponent<Image>().color = Color.black;
-                    highlighting = true;
-                        break;
-            }
         }
-        if (highlighting) {
-            GameObject go = GameObject.Find(OptionChosen);
-            go.GetComponent<Image>().color = new Color(0,0,0,0);
-            highlighting = false;
-        }
-
+   
     }
     void CloseJS()
     {
