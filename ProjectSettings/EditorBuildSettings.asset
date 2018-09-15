@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MainScene.unity
     guid: 64622454b9257fa4a882e7a2656295af
-  - enabled: 1
+  - enabled: 0
     path: Assets/SwipeMenuFromLeft/MenuScene.unity
     guid: 6ebdb97315d82d249855f1442d373e97
   m_configObjects: {}

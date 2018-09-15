@@ -11,6 +11,7 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
     //joystick nub will refer to that button when it can be moved around
 
        
+    public Text txt;
 
     string OptionChosen;
 
@@ -45,6 +46,8 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
             if (touch.phase == TouchPhase.Ended)
             {
                 ButtonSelected(45,true);
+                CloseJS();
+                
               
             }
         }
@@ -63,8 +66,9 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
     }
 
 
-    void RegionActionHandler()
+    void RegionActionHandler() ///////////////put the scripts for depressing the buttons here
     {
+        txt.text = OptionChosen;   ///////////take this out it was just for debug
         switch (OptionChosen)
         {
             case "topRight":
@@ -107,7 +111,7 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
             if (wantToPressIfGreater) { CloseJS(); return; }
             
         }
-   
+    
     }
     void CloseJS()
     {
