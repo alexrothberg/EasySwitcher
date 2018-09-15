@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 202047379}
   - component: {fileID: 202047381}
   m_Layer: 5
-  m_Name: BLeft
+  m_Name: bottomLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 306372018}
   - component: {fileID: 306372020}
   m_Layer: 5
-  m_Name: TLeft
+  m_Name: topLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 1460285994}
   - component: {fileID: 1460285996}
   m_Layer: 5
-  m_Name: BRight
+  m_Name: bottomRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -908,7 +908,7 @@ GameObject:
   - component: {fileID: 2022695131}
   - component: {fileID: 2022695133}
   m_Layer: 5
-  m_Name: TRight
+  m_Name: topLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
