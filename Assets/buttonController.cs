@@ -10,7 +10,10 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
     //button will refer to the white button with shadow that is always visible
     //joystick nub will refer to that button when it can be moved around
 
-       
+  
+    bool usingFrozen = true;
+    Vector2 nubStartPos;
+
     public Text txt;
 
     string OptionChosen;
@@ -22,6 +25,10 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
     public GameObject Joystick;
     public Touch touch;
     Vector3 Shrinker = new Vector3(.01f, .01f, .01f);
+    private void Start()
+    {
+        nubStartPos = Nub.transform.position;
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -39,11 +46,24 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
         if (B_Joystick_Visible) //this checks to see whether the joystick is visible and behaves accordingly
         {
             touch = Input.GetTouch(0);
-            Nub.transform.position = touch.position;
-            //ButtonSelected(30, false); //this will tell what to highlight
-            ButtonSelected(60,true); //this will just chose it
+            if (usingFrozen)
+            {
+                if (Vector3.Distance(nubStartPos, touch.position) < 190) { Nub.transform.position = touch.position; }
+                else { Nub.transform.localPosition = Vector3.Normalize( (touch.position - nubStartPos)) * 65; }                
+                
+                ButtonSelected(65, false); 
+                //ButtonSelected(30, false); //this will tell what to highlight
 
-            if (touch.phase == TouchPhase.Ended)
+            }
+            else
+            {
+                Nub.transform.position = touch.position; //this binds the nub to finger
+                ButtonSelected(60, true);//this will snap to choosing the region
+            }
+
+
+
+                if (touch.phase == TouchPhase.Ended)
             {
                 ButtonSelected(45,true);
                 CloseJS();
@@ -110,9 +130,16 @@ public class buttonController : MonoBehaviour, IPointerDownHandler{
             RegionActionHandler();
             if (wantToPressIfGreater) { CloseJS(); return; }
             
+            
         }
     
     }
+    
+    public void ToggleSnap()
+    {
+        usingFrozen = !usingFrozen;
+    }
+
     void CloseJS()
     {
         if (!B_Joystick_Visible) { return; }
